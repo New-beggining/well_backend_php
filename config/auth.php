@@ -38,10 +38,13 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users', // maybe will admins or smth
         ],
+        'api' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ]
     ],
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
