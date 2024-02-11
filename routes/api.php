@@ -24,7 +24,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::post('register', [UserController::class, 'register'])->name('register');
 });
 
-// Auth routes
-//Route::middleware('auth:sanctum')->group(function () {
-//
-//});
+// Авторизованные роуты (требуют токен)
+Route::middleware('auth:sanctum')->group(function () {
+    Route::resource('users', UserController::class)->except(['create','store','edit']);
+});
