@@ -19,11 +19,18 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create system user to run Composer and Artisan Commands
-RUN mkdir -p /home/www-data/.composer && \
-    chown -R www-data:www-data /home/www-data
+# Configure www-data user
+ARG WWWUSER=1000
+ENV WWWUSER ${WWWUSER}
+ARG WWWGROUP=1000
+ENV WWWGROUP ${WWWGROUP}
 
-# Set working directory
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+COPY ./docker-compose/php/custom.ini $PHP_INI_DIR/conf.d/
+
+RUN groupmod -o -g ${WWWGROUP} www-data && \
+    usermod -o -u ${WWWUSER} -g www-data www-data
+
 WORKDIR /var/www
 
 USER www-data

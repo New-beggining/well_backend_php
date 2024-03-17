@@ -17,3 +17,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/docker-compose/nginx/nginx.conf
+/docker-compose/php/custom.ini
