@@ -18,5 +18,6 @@ yarn-error.log
 /.idea
 /.vscode
 /.composer
+/.bash_history
 /docker-compose/nginx/nginx.conf
 /docker-compose/php/custom.ini
